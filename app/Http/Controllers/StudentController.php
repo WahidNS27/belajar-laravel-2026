@@ -48,10 +48,18 @@ class StudentController extends Controller
         ]);
 
         //simpan kedatabase nya
+        $student = new Student();
+        $student->name = $request->name;
+        $student->email = $request->email;
+        $student->gender = $request->gender;
+        $student->address = $request->address;
+        $student->phone = $request->phone;
+        
         $imageName = null;
         if ($request->hasFile('image')) {
             $imageName = time() . '.' . $request->image->extension();
-            $request->image->move(public_path('upload/students'), $imageName);
+            $request->image->storeAs('students', $imageName, 'public');
+            $student->image = $imageName;
         }
         Student::create([
             'name' => $request->name,
@@ -104,14 +112,16 @@ class StudentController extends Controller
         $student = Student::findOrFail($id);
         $imageName = $student->image;
         if ($request->hasFile('image')) {
-            # hapus gambar lama
-            if ($student->image && file_exists(public_path('storage/students/'. $student->image))) {
-                unlink(public_path('storage/students' . $student->image));
-            }
-            //gambar baru
 
-            $imageName = time() . '.' . $request->image->extension();
-            $request->image->move(public_path('storage/students'), $imageName);
+            // hapus gambar lama
+            if ($student->image && Storage::disk('public')->exists('students/'.$student->image)) {
+                Storage::disk('public')->delete('students/'.$student->image);
+            }
+        
+            // upload gambar baru
+            $imageName = time().'.'.$request->image->extension();
+            $request->image->storeAs('students', $imageName, 'public');
+        
             $student->image = $imageName;
         }
 
@@ -135,8 +145,8 @@ class StudentController extends Controller
     {
         //
         $student = Student::findOrFail($id);
-        if ($student->image && file_exists(public_path('storage/students/' . $student->image))) {
-            unlink(public_path('storage/students/' . $student->image));
+        if ($student->image) {
+            Storage::disk('public')->delete('students/'.$student->image);
         }
         $student->delete();
       
