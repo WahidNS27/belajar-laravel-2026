@@ -8,7 +8,7 @@
                         <div class="alert alert-danger">{{ $errors->first }}</div>
                     @endif
                     <h5 class="card-title"></h5>
-                    <form action="{{ route('student.store') }}" method="POST">
+                    <form action="{{ route('student.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
                             <label for="name" class="form-label">Nama</label>
@@ -34,8 +34,8 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="address" class="form-label">Address</label>
-                            <textarea class="form-control" id="address" name="address" rows="3" placeholder="Enter your address">{{ old('address') }}</textarea>
+                            <label for="addres" class="form-label">Address</label>
+                            <textarea class="form-control" id="addres" name="addres" rows="3" placeholder="Enter your address">{{ old('addres') }}</textarea>
                         </div>
 
                         <div class="mb-3">

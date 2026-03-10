@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\models\Student;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -96,7 +97,7 @@ class StudentController extends Controller
             'email' => 'required|email|unique:students,email,' . $id,
             'gender' => 'nullable',
             'phone' => 'nullable',
-            'address' => 'nullable',
+            'addres' => 'nullable',
             'image' => 'nullable|image|mimes:jpg,png,jpeg|max:2048'
         ]);
 
@@ -104,13 +105,14 @@ class StudentController extends Controller
         $imageName = $student->image;
         if ($request->hasFile('image')) {
             # hapus gambar lama
-            if ($student->image) {
-                unlink(public_path('uploads/students/' . $student->image));
+            if ($student->image && file_exists(public_path('storage/students/'. $student->image))) {
+                unlink(public_path('storage/students' . $student->image));
             }
             //gambar baru
 
             $imageName = time() . '.' . $request->image->extension();
-            $request->move(public_path('uploads/students'), $imageName);
+            $request->image->move(public_path('storage/students'), $imageName);
+            $student->image = $imageName;
         }
 
         $student->name = $request->name;
@@ -132,10 +134,13 @@ class StudentController extends Controller
     public function destroy(string $id)
     {
         //
-        $student = Student::find($id);
+        $student = Student::findOrFail($id);
+        if ($student->image && file_exists(public_path('storage/students/' . $student->image))) {
+            unlink(public_path('storage/students/' . $student->image));
+        }
         $student->delete();
-        unlink(public_path('uploads/students/' . $student->image));
+      
         Alert::success('Success', 'Student remove succsessfully');
-        return redirect()->route('student.index');
+        return redirect()->route('student.index')->with('success' , 'Student deleted successfully');
     }
 }
