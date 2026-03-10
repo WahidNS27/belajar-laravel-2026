@@ -5,6 +5,9 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\perhitunganController;
 use App\Http\Controllers\pesertaController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -88,3 +91,7 @@ route::get('dashboard', [DashboardController::class, 'index']);
 
 route::post('action-login', [LoginController::class, 'actionLogin'])->name('action-login');
 route::post('logout', [LoginController::class, 'logout'])->name('logout');
+
+Route::resource('user', UserController::class);
+Route::resource('role', RoleController::class);
+Route::resource('student', StudentController::class);

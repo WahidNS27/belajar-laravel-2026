@@ -41,13 +41,14 @@
 </head>
 
 <body>
+    {{-- sweet alert --}}
+    @include('sweetalert::alert')
 
     {{-- HEADERRR --}}
-    @include('layouts.inc.header');
+    @include('layouts.inc.header')
 
     {{-- sidebarrr --}}
-    @include('layouts.inc.sidebar');
-
+    @include('layouts.inc.sidebar')
 
     <main id="main" class="main">
 
@@ -64,14 +65,14 @@
 
         <section class="section">
             {{-- yield adalah sebuah parent template yang bisa terisi oleh komponen --}}
-            @yield('content');
+            @yield('content')
         </section>
 
     </main><!-- End #main -->
 
     {{-- Footer --}}
 
-    @include('layouts.inc.footer');
+    @include('layouts.inc.footer')
 
 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
@@ -89,6 +90,31 @@
 
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
+
+
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
+
+    {{-- script sweet alert --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        $(document).on('click', '.delete-btn', function(e) {
+            e.preventDefault();
+            var form = $(this).closest('form');
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3086d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, Delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            })
+        });
+    </script>
 
 </body>
 

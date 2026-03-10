@@ -185,9 +185,21 @@
             <li class="nav-heading">Pages</li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="users-profile.html">
+                <a class="nav-link collapsed" href="{{ route('user.index') }}">
                     <i class="bi bi-person"></i>
-                    <span>Profile</span>
+                    <span>Users</span>
+                </a>
+            </li><!-- End Profile Page Nav -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ route('role.index') }}">
+                    <i class="bi bi-person-workspace"></i>
+                    <span>Roles</span>
+                </a>
+            </li><!-- End Profile Page Nav -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ route('student.index') }}">
+                    <i class="bi bi-person-add"></i>
+                    <span>Student</span>
                 </a>
             </li><!-- End Profile Page Nav -->
 
