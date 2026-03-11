@@ -12,6 +12,7 @@
                         <thead>
                             <tr class="text-center">
                                 <th>No</th>
+                                <th>Role</th>
                                 <th>Nama</th>
                                 <th>Email</th>
                                 <th>Action</th>
@@ -21,6 +22,7 @@
                             @foreach ($users as $user)
                                 <tr class="text-center">
                                     <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $user->role->name }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td class="d-flex gap-2 justify-content-center">

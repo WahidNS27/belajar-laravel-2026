@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\BelajarController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
@@ -93,5 +94,9 @@ route::post('action-login', [LoginController::class, 'actionLogin'])->name('acti
 route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::resource('user', UserController::class);
+
 Route::resource('role', RoleController::class);
+
 Route::resource('student', StudentController::class);
+
+Route::resource('student', AttendanceController::class);
