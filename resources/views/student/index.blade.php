@@ -27,10 +27,10 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $student->name }}</td>
                                     <td>{{ $student->email }}</td>
-                                    <td>{{ $student->gender}}</td>
+                                    <td>{{ $student->gender == 1 ? 'Male' : 'Female' }}</td>
                                     <td>{{ $student->addres }}</td>
                                     <td>{{ $student->phone }}</td>
-                                    <td>  <img src="{{ asset('storage/students/'.$student->image) }}" width="80"></td>
+                                    <td> <img src="{{ asset('storage/students/' . $student->image) }}" width="80"></td>
                                     <td class="d-flex gap-2 justify-content-center">
                                         <a href="{{ route('student.edit', $student->id) }}"
                                             class="btn btn-primary btn-sm mb-2">Edit</a>

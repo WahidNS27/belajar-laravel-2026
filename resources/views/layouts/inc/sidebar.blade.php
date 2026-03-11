@@ -198,7 +198,7 @@
             </li><!-- End Profile Page Nav -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('student.index') }}">
-                    <i class="bi bi-person-add"></i>
+                    <i class="bi bi-person-lines-fill"></i>
                     <span>Student</span>
                 </a>
             </li><!-- End Profile Page Nav -->

@@ -54,7 +54,7 @@ class StudentController extends Controller
         $student->gender = $request->gender;
         $student->address = $request->address;
         $student->phone = $request->phone;
-        
+
         $imageName = null;
         if ($request->hasFile('image')) {
             $imageName = time() . '.' . $request->image->extension();
@@ -98,8 +98,6 @@ class StudentController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
-
         $request->validate([
             'name' => 'required|string',
             'email' => 'required|email|unique:students,email,' . $id,
@@ -110,18 +108,18 @@ class StudentController extends Controller
         ]);
 
         $student = Student::findOrFail($id);
-        $imageName = $student->image;
+
         if ($request->hasFile('image')) {
 
             // hapus gambar lama
-            if ($student->image && Storage::disk('public')->exists('students/'.$student->image)) {
-                Storage::disk('public')->delete('students/'.$student->image);
+            if ($student->image && Storage::disk('public')->exists('students/' . $student->image)) {
+                Storage::disk('public')->delete('students/' . $student->image);
             }
-        
+
             // upload gambar baru
-            $imageName = time().'.'.$request->image->extension();
+            $imageName = time() . '.' . $request->image->extension();
             $request->image->storeAs('students', $imageName, 'public');
-        
+
             $student->image = $imageName;
         }
 
@@ -130,12 +128,12 @@ class StudentController extends Controller
         $student->gender = $request->gender;
         $student->addres = $request->addres;
         $student->phone = $request->phone;
-        $student->image = $request->image;
+
         $student->save();
 
-        Alert::success('Success', 'Student updated succsessfully');
-        return redirect()->route('student.index');
+        Alert::success('Success', 'Student updated successfully');
 
+        return redirect()->route('student.index');
     }
 
     /**
@@ -146,11 +144,11 @@ class StudentController extends Controller
         //
         $student = Student::findOrFail($id);
         if ($student->image) {
-            Storage::disk('public')->delete('students/'.$student->image);
+            Storage::disk('public')->delete('students/' . $student->image);
         }
         $student->delete();
-      
+
         Alert::success('Success', 'Student remove succsessfully');
-        return redirect()->route('student.index')->with('success' , 'Student deleted successfully');
+        return redirect()->route('student.index')->with('success', 'Student deleted successfully');
     }
 }
