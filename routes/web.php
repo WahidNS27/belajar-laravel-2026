@@ -99,4 +99,4 @@ Route::resource('role', RoleController::class);
 
 Route::resource('student', StudentController::class);
 
-Route::resource('student', AttendanceController::class);
+Route::resource('attendance', AttendanceController::class);

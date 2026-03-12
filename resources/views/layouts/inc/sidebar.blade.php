@@ -202,6 +202,12 @@
                     <span>Student</span>
                 </a>
             </li><!-- End Profile Page Nav -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ route('attendance.index') }}">
+                    <i class="bi bi-person-check"></i>
+                    <span>Attandance</span>
+                </a>
+            </li><!-- End Contact Page Nav -->
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="pages-faq.html">
@@ -210,12 +216,6 @@
                 </a>
             </li><!-- End F.A.Q Page Nav -->
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="pages-contact.html">
-                    <i class="bi bi-envelope"></i>
-                    <span>Contact</span>
-                </a>
-            </li><!-- End Contact Page Nav -->
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="pages-register.html">
